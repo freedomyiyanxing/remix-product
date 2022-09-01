@@ -13,6 +13,7 @@ export default function () {
         ))
       }
       <Link to="/test">测试页</Link>
+      <Link to="/error">测试错误页面</Link>
     </div>
   )
 }
