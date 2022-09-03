@@ -1,5 +1,5 @@
 import React from 'react';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useCatch, useLoaderData, useParams } from '@remix-run/react';
 

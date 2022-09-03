@@ -7,13 +7,20 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useTransition,
 } from "@remix-run/react";
-import { LoaderFunction } from '@remix-run/node';
+import { LoaderFunction, LinksFunction, json } from '@remix-run/node';
 import { withEmotionCache } from '@emotion/react';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
+import NProgress from 'nprogress';
+import nprogressCss from 'nprogress/nprogress.css';
 import Layout from '~/common/sht-layout';
 import theme from '~/utils/theme';
 import ClientStyleContext from '~/utils/client-style-context';
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: nprogressCss }];
+};
 
 export let loader: LoaderFunction = async () => {
   return { date: new Date() };
@@ -26,6 +33,7 @@ interface DocumentProps {
 
 const Document = withEmotionCache(({ children, title }: DocumentProps, emotionCache) => {
   const clientStyleData = React.useContext(ClientStyleContext);
+  const transition = useTransition();
 
   useEnhancedEffect(() => {
     emotionCache.sheet.container = document.head;
@@ -36,6 +44,15 @@ const Document = withEmotionCache(({ children, title }: DocumentProps, emotionCa
     });
     clientStyleData.reset();
   }, []);
+
+  React.useEffect(() => {
+    if (transition.state === 'idle') {
+      NProgress.done();
+    } else {
+      NProgress.start();
+    }
+    console.log(transition.state);
+  }, [transition.state])
 
   return (
     <html lang="en">
@@ -67,6 +84,7 @@ const Document = withEmotionCache(({ children, title }: DocumentProps, emotionCa
 export default function App() {
   let data = useLoaderData();
   console.log(data);
+  console.log(typeof document)
   return (
     <Document>
       <Layout>

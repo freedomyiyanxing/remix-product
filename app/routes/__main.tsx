@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Outlet } from 'react-router';
-import { useLoaderData } from '@remix-run/react';
+import { NavLink, useLoaderData } from '@remix-run/react';
 import axios from 'axios';
-import { Button } from '@mui/material'
+import { Button, Box, AppBar, Toolbar, IconButton } from '@mui/material'
 
 // http://t.bomman.com/api/mall-search/keyword?keyword=a
 const serverInstance = axios.create({
@@ -17,7 +17,6 @@ serverInstance.interceptors.response.use(
 
 export async function loader() {
   const res = await serverInstance.get('/api/mall-base/navigationbar/list/page?queryType=1');
-  console.log('NODE_DEMO_1--', process.env.NODE_DEMO_1)
   return {
     NODE_ENV_1: process.env.NODE_DEMO_1,
     data: (res as any).records,
@@ -27,24 +26,48 @@ export async function loader() {
 export default function main() {
   const { data, NODE_ENV_1 } = useLoaderData();
   return (
-    <div>
-      <Button variant="contained" color="secondary">material</Button>
-      <p>环境变量</p>
-      <h3>NODE_ENV: {process.env.NODE_ENV}</h3>
-      <h3>NODE_ENV_1: {NODE_ENV_1}</h3>
-      <h1>
-        主页
-      </h1>
-      <div>
-        {
-          (data as any).map((v: any) => (
-            <div key={v.id}>
-              {v.name}
-            </div>
-          ))
-        }
-      </div>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              Freedom.yi
+            </IconButton>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: {
+                  xs: 'flex',
+                }
+              }}
+            >
+              {
+                (data as any).map((v: any) => (
+                  <NavLink
+                    key={v.id}
+                    to={v.skipUrl}
+                    style={({ isActive }) => {
+                      return  isActive ? { textDecoration: 'none' } : {} as CSSProperties
+                    }}
+                  >
+                    <Box component="div" sx={{ flexGrow: 1, py: 1, px: 2 }}>
+                      {v.name}
+                    </Box>
+                  </NavLink>
+                ))
+              }
+            </Box>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Outlet />
-    </div>
+    </>
   )
 }

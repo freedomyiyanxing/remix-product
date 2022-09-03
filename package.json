@@ -14,6 +14,12 @@
     "node": ">=14"
   },
   "dependencies": {
+    "@emotion/cache": "11.10.3",
+    "@emotion/core": "11.0.0",
+    "@emotion/react": "11.10.4",
+    "@emotion/server": "11.10.0",
+    "@emotion/styled": "11.10.4",
+    "@mui/material": "5.10.3",
     "@remix-run/express": "^1.7.0",
     "@remix-run/node": "1.6.8",
     "@remix-run/react": "1.6.8",
@@ -21,14 +27,9 @@
     "axios": "0.27.2",
     "dotenv": "16.0.1",
     "koa": "2.13.4",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "@emotion/cache": "11.10.3",
-    "@emotion/core": "11.0.0",
-    "@emotion/server": "11.10.0",
-    "@emotion/styled": "11.10.4",
-    "@emotion/react": "11.10.4",
-    "@mui/material": "5.10.3"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "1.6.8",
@@ -46,6 +47,7 @@
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "pm2": "^5.2.0",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "@types/nprogress": "0.2.0"
   }
 }
