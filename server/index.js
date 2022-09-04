@@ -21,7 +21,7 @@ app.all(
     // and your server
     getLoadContext(req, res) {
       // console.log(req, res);
-      console.log(req.url);
+      console.log('我是自定义服务器 node：', req.url);
       return {};
     },
   })

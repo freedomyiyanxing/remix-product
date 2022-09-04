@@ -5,8 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "remix build",
-    "start": "remix-serve build",
-    "dev": "remix dev",
+    "start1": "remix-serve build",
+    "start": "cross-env NODE_ENV=production node ./server/index.js",
+    "dev1": "remix dev",
+    "dev": "remix build && run-p dev:*",
     "dev:node": "cross-env NODE_ENV=development nodemon ./server/index.js",
     "dev:remix": "remix watch"
   },

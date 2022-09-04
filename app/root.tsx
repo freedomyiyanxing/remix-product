@@ -8,18 +8,17 @@ import {
   ScrollRestoration,
   useLoaderData,
   useTransition,
-} from "@remix-run/react";
-import { LoaderFunction, LinksFunction, json } from '@remix-run/node';
+} from '@remix-run/react';
+import { LoaderFunction, LinksFunction } from '@remix-run/node';
 import { withEmotionCache } from '@emotion/react';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
 import NProgress from 'nprogress';
 import nprogressCss from 'nprogress/nprogress.css';
-import Layout from '~/common/sht-layout';
 import theme from '~/utils/theme';
 import ClientStyleContext from '~/utils/client-style-context';
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: nprogressCss }];
+  return [{ rel: 'stylesheet', href: nprogressCss }];
 };
 
 export let loader: LoaderFunction = async () => {
@@ -56,26 +55,26 @@ const Document = withEmotionCache(({ children, title }: DocumentProps, emotionCa
 
   return (
     <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="theme-color" content={theme.palette.primary.main} />
-        {title ? <title>{title}</title> : null}
-        <Meta />
-        <Links />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-        <meta name="emotion-insertion-point" content="emotion-insertion-point" />
-        <title>易炎星</title>
-      </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <meta name="theme-color" content={theme.palette.primary.main} />
+      {title ? <title>{title}</title> : null}
+      <Meta />
+      <Links />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+      <meta name="emotion-insertion-point" content="emotion-insertion-point" />
+      <title>易炎星</title>
+    </head>
+    <body>
+    {children}
+    <ScrollRestoration />
+    <Scripts />
+    <LiveReload />
+    </body>
     </html>
   );
 });
@@ -87,9 +86,7 @@ export default function App() {
   console.log(typeof document)
   return (
     <Document>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <Outlet />
     </Document>
   );
 }

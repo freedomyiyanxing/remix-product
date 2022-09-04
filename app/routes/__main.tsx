@@ -1,8 +1,9 @@
 import React, { CSSProperties } from 'react';
 import { Outlet } from 'react-router';
-import { NavLink, useLoaderData } from '@remix-run/react';
+import { Link, NavLink, useLoaderData } from '@remix-run/react';
 import axios from 'axios';
 import { Button, Box, AppBar, Toolbar, IconButton } from '@mui/material'
+import Layout from '~/common/sht-layout';
 
 // http://t.bomman.com/api/mall-search/keyword?keyword=a
 const serverInstance = axios.create({
@@ -24,7 +25,7 @@ export async function loader() {
 }
 
 export default function main() {
-  const { data, NODE_ENV_1 } = useLoaderData();
+  const { data } = useLoaderData();
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -63,11 +64,15 @@ export default function main() {
                 ))
               }
             </Box>
-            <Button color="inherit">Login</Button>
+            <Link to="/login">
+              <Button color="inherit">Login</Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>
-      <Outlet />
+      <Layout>
+        <Outlet />
+      </Layout>
     </>
   )
 }
