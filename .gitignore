@@ -5,3 +5,5 @@ yarn.lock
 /build
 /public/build
 .env
+
+**/build

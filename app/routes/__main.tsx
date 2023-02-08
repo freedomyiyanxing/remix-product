@@ -17,15 +17,35 @@ serverInstance.interceptors.response.use(
 )
 
 export async function loader() {
+  console.log(1);
   const res = await serverInstance.get('/api/mall-base/navigationbar/list/page?queryType=1');
+  console.log(2);
+  const num=Math.floor(Math.random()*10+1);
   return {
-    NODE_ENV_1: process.env.NODE_DEMO_1,
-    data: (res as any).records,
+    data:  num > 5 ? (res as any).records : null,
+    number: num,
   }
 }
 
 export default function main() {
-  const { data } = useLoaderData();
+  const { data, number } = useLoaderData();
+
+  React.useEffect(() => {
+    console.log(number);
+    console.log(data ,'--');
+  }, [])
+
+  if(data == null) {
+    return (
+      <>
+        <div>客户端渲染</div>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </>
+    )
+  }
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
